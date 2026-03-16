@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matyan-api-models"
+version = "0.2.0"
+description = "Models for the Matyan API"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+keywords = ["pydantic", "api", "matyan", "schemas"]
+
+authors = [
+    { name = "Tigran Grigoryan", email = "grigoryan.tigran119@gmail.com" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
+requires-python = ">=3.10, <4"
+dependencies = ["pydantic~=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/4gt-104/matyan-core"
+Repository = "https://github.com/4gt-104/matyan-core"
+Documentation = "https://4gt-104.github.io/matyan-core/"
+
+[dependency-groups]
+dev = ["mypy~=1.15", "pytest~=8.0"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "FBT001",
+    "FBT002",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D203",
+    "D213",
+    "D417",
+    "FBT003",
+    "EXE002",
+    "S311",
+    "TD003",
+    "D205",
+    "PLR2004",
+    "PLR0913",
+    "S101",
+    "S104",
+]
