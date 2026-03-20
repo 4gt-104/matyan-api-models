@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=61", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "matyan-api-models"
-version = "0.2.0"
+dynamic = ["version"]
 description = "Models for the Matyan API"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -34,6 +34,9 @@ dependencies = ["pydantic~=2.0"]
 Homepage = "https://github.com/4gt-104/matyan-core"
 Repository = "https://github.com/4gt-104/matyan-core"
 Documentation = "https://4gt-104.github.io/matyan-core/"
+
+[tool.setuptools_scm]
+fallback_version = "0.2.0"
 
 [dependency-groups]
 dev = ["mypy~=1.15", "pytest~=8.0"]
