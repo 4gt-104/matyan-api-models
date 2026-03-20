@@ -1,0 +1,67 @@
+# Tag release: publish wheel + sdist to PyPI.
+#
+# Uses OIDC Trusted Publisher — no API token secret required for PyPI.
+# One-time setup on PyPI:
+#   1. Go to https://pypi.org/manage/account/publishing/
+#   2. Add a new pending publisher:
+#      - PyPI project name : matyan-api-models
+#      - Owner             : <your-github-org-or-username>
+#      - Repository        : <repo-name>
+#      - Workflow name     : release.yml
+#      - Environment name  : pypi
+#
+# The "pypi" GitHub environment can optionally have branch/tag
+# protection rules to restrict which refs are allowed to publish.
+
+name: Release (PyPI)
+
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  build:
+    name: Build distributions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # setuptools-scm derives the version from git tags; full history is required
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Build wheel and sdist
+        run: uv build
+
+      - name: Upload distributions as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # Required for OIDC Trusted Publisher authentication
+      id-token: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
