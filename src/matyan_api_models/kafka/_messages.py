@@ -10,11 +10,18 @@ class IngestionMessage(BaseModel):
 
     Both frontier (producer) and ingestion workers (consumer) depend on this
     schema.  The ``type`` field discriminates the payload shape.
+
+    :param type: Message type (e.g. ``"create_run"``, ``"log_metric"``).
+    :param run_id: The run this message belongs to.
+    :param project_id: The project this message belongs to; scopes all FDB
+        writes to the correct project key space.
+    :param timestamp: When the message was created.
+    :param payload: Type-specific data dict.
     """
 
     type: str
     run_id: str
-    project_id: str  # identifies which project this message belongs to
+    project_id: str
     timestamp: datetime
     payload: dict
 
