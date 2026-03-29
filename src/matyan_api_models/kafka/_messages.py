@@ -14,6 +14,7 @@ class IngestionMessage(BaseModel):
 
     type: str
     run_id: str
+    project_id: str  # identifies which project this message belongs to
     timestamp: datetime
     payload: dict
 
@@ -23,6 +24,10 @@ class ControlEvent(BaseModel):
 
     Published by the backend API after synchronous FDB writes.
     Consumed by control workers for async side effects (S3 cleanup, etc.).
+
+    Valid ``type`` values: ``"run_deleted"``, ``"run_archived"``,
+    ``"run_unarchived"``, ``"experiment_deleted"``, ``"tag_deleted"``,
+    ``"project_deleted"``.
     """
 
     type: str
