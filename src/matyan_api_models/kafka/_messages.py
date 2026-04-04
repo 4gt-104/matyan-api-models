@@ -1,8 +1,16 @@
+"""Concrete Pydantic envelopes for Matyan Kafka topics.
+
+Defines :class:`IngestionMessage` and :class:`ControlEvent` with shared header fields
+and a JSON-serializable ``payload`` dict per message kind.
+"""
+
 from __future__ import annotations
 
 from datetime import datetime  # noqa: TC003
 
 from pydantic import BaseModel
+
+from matyan_api_models.typing import ProjectId, RunId  # noqa: TC001
 
 
 class IngestionMessage(BaseModel):
@@ -20,8 +28,8 @@ class IngestionMessage(BaseModel):
     """
 
     type: str
-    run_id: str
-    project_id: str
+    run_id: RunId
+    project_id: ProjectId
     timestamp: datetime
     payload: dict
 

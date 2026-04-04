@@ -1,3 +1,9 @@
+"""WebSocket ingestion schemas for ``matyan-frontier``.
+
+Re-exports discriminated request models, the ``WsRequestT`` union, ``WsRequestTAdapter``,
+and :class:`WsResponse` for JSON parse/serialize at the WebSocket boundary.
+"""
+
 from ._requests import (
     AddTagWsRequest,
     BaseWsRequest,

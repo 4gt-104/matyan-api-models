@@ -39,11 +39,11 @@ Documentation = "https://4gt-104.github.io/matyan-core/"
 fallback_version = "0.2.0"
 
 [dependency-groups]
-dev = ["mypy~=1.15", "pytest~=8.0"]
+dev = ["pytest~=8.0"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py312"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -74,7 +74,13 @@ ignore = [
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
-platforms = ["linux-aarch64", "linux-64", "osx-arm64"]
+platforms = [
+    "linux-aarch64",
+    "linux-64",
+    "osx-64",
+    "osx-arm64",
+    "win-64",
+]
 
 [tool.pixi.pypi-dependencies]
 matyan-api-models = { path = ".", editable = true }
